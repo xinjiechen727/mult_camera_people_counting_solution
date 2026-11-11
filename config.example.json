@@ -1,0 +1,31 @@
+{
+  "nvr": {
+    "ip": "192.0.2.10",
+    "port": 554,
+    "username": "CHANGE_ME",
+    "passwords": ["CHANGE_ME"]
+  },
+  "channels": [
+    {"id": 1, "camera_ip": "192.0.2.101", "area": "Area 01", "mode": "yolo"},
+    {"id": 2, "camera_ip": "192.0.2.102", "area": "Area 02", "mode": "yolo"},
+    {"id": 3, "camera_ip": "192.0.2.103", "area": "Area 03", "mode": "yolo", "rtsp_path": "/Streaming/Channels/101", "tiled_inference": true},
+    {"id": 4, "camera_ip": "192.0.2.104", "area": "Area 04", "mode": "yolo"},
+    {"id": 5, "camera_ip": "192.0.2.105", "area": "Area 05", "mode": "yolo", "rtsp_path": "/Streaming/Channels/101", "tiled_inference": true},
+    {"id": 6, "camera_ip": "192.0.2.106", "area": "Area 06", "mode": "yolo"},
+    {"id": 7, "camera_ip": "192.0.2.107", "area": "Area 07", "mode": "yolo"},
+    {"id": 8, "camera_ip": "192.0.2.108", "area": "Area 08", "mode": "yolo"},
+    {"id": 9, "camera_ip": "192.0.2.109", "area": "Area 09", "mode": "yolo"},
+    {"id": 10, "camera_ip": "192.0.2.110", "area": "Area 10", "mode": "yolo"},
+    {"id": 11, "camera_ip": "192.168.42.1", "area": "Area 11", "mode": "recamera_yolo_vlm", "recamera_url": "http://192.168.42.1:1880/api/snapshot", "tiled_inference": true},
+    {"id": 12, "camera_ip": "192.0.2.112", "area": "Area 12", "mode": "yolo"},
+    {"id": 13, "camera_ip": "192.0.2.113", "area": "Area 13", "mode": "yolo"},
+    {"id": 14, "camera_ip": "192.0.2.114", "area": "Area 14", "mode": "yolo", "rtsp_path": "/Streaming/Channels/101", "tiled_inference": true}
+  ],
+  "rtsp": {
+    "direct_path": "/Streaming/Channels/102"
+  },
+  "recamera_ids_url": "http://192.168.42.1:1880/api/ids",
+  "dashboard_api": "http://127.0.0.1:3000/api/trpc",
+  "yolo_interval": 20,
+  "config_reload_interval": 3
+}

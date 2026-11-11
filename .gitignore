@@ -1,0 +1,50 @@
+# Local credentials and site-specific configuration
+.env
+.env.*
+!.env.example
+!.env.deploy.example
+config.json
+app/.env
+
+# Runtime and generated data
+model/
+photo/
+video/
+backups/
+logs/
+field_test_log.jsonl
+app/dist/
+app/node_modules/
+node_modules/
+__pycache__/
+*.py[cod]
+*.log
+*.pid
+*.tmp
+core
+app/core
+
+# Model and media artifacts are provisioned through reComputer AI Lab
+*.rknn
+*.rkllm
+*.onnx
+*.pt
+*.pth
+*.so
+*.mp4
+*.zip
+
+# Local snapshots and historical copies
+*.backup
+*.backup_*
+*.sql.gz
+*.dump
+
+# Local packaged project copies are intentionally not part of this repository
+*-pkg/
+
+# Editors and OS metadata
+.vscode/
+.idea/
+.DS_Store
+*.swp

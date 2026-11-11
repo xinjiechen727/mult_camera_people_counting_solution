@@ -1,0 +1,21 @@
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb-people-counting
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?required}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-people_counting}
+      MARIADB_USER: ${MARIADB_USER:-people_app}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:?required}
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - people-counting-db:/var/lib/mysql
+
+volumes:
+  people-counting-db:

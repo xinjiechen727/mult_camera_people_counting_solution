@@ -1,0 +1,7 @@
+opencv-python-headless
+numpy
+fastapi
+uvicorn
+pydantic
+mysql-connector-python
+python-dotenv
