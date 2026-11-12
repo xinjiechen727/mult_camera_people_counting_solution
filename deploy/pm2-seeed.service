@@ -1,0 +1,21 @@
+[Unit]
+Description=PM2 process manager for the people counting system
+Documentation=https://pm2.keymetrics.io/
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=seeed
+RemainAfterExit=yes
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+Environment=PM2_HOME=/home/seeed/.pm2
+ExecStartPre=/bin/sh -c 'until timeout 2 bash -c "</dev/tcp/127.0.0.1/3306" 2>/dev/null; do echo "[pm2-seeed] waiting for MariaDB on 3306..."; sleep 2; done; echo "[pm2-seeed] MariaDB port ready"'
+ExecStart=/bin/bash -lc 'source /home/seeed/.nvm/nvm.sh && pm2 resurrect'
+ExecReload=/bin/bash -lc 'source /home/seeed/.nvm/nvm.sh && pm2 reload all'
+ExecStop=/bin/bash -lc 'source /home/seeed/.nvm/nvm.sh && pm2 kill'
+
+[Install]
+WantedBy=multi-user.target
