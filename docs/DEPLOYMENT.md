@@ -109,3 +109,26 @@ curl http://127.0.0.1:3000/api/trpc/footfall.stats?input=%7B%22json%22%3Anull%7D
 - 今日总人数严格等于各区域人数之和
 - 周、月、年、总客流只按校准增量增长一次
 - 重启后数据库、每日比例和累计基准不丢失
+
+
+### PM2 v7 systemd兼容配置
+
+部分PM2 v7环境生成的systemd单元使用 `Type=forking` 和 `PIDFile`，但PM2守护进程没有及时生成PID文件时，systemd会将已经在线的进程误判为 `Result: protocol`，并反复执行 `pm2 resurrect`。仓库提供了经过现场验证的 `Type=oneshot` 单元：
+
+```bash
+sudo install -o root -g root -m 0644 \
+  deploy/pm2-seeed.service /etc/systemd/system/pm2-seeed.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now pm2-seeed.service
+systemctl is-active pm2-seeed.service
+pm2 status
+```
+
+该单元会等待本机MariaDB端口就绪，再恢复 `pm2 save` 保存的进程列表。若部署用户不是 `seeed`，需要同步修改单元中的 `User`、`PM2_HOME` 和NVM路径。
+
+设备根分区必须保留可写空间；磁盘达到100%时PM2无法写入状态和日志，检测、大屏及跨日统计都会停止。建议部署监控至少在剩余空间低于10%时告警，并定期检查：
+
+```bash
+df -h /
+du -sh ~/.pm2/logs ~/.vscode-server* /data/seeed/demo/field_test_log.jsonl
+```
